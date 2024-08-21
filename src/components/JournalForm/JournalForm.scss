@@ -1,0 +1,111 @@
+.journal_form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+}
+
+.journal_form-text {
+  width: 935px;
+  height: 41px;
+  background-color: transparent; // прозрачность
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 30px;
+  &::placeholder {
+    color: #fff;
+    font-size: 30px;
+  }
+}
+
+.text_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+    cursor: pointer;
+  }
+}
+
+.journal_btn {
+  background-color: transparent;
+  border: none;
+  outline: none; // убирает с кнопок и тд
+  width: 0;
+  height: 0;
+}
+
+.journal_form-date {
+  width: 100%;
+  height: 41px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  &::placeholder {
+    color: #fff;
+    font-size: 16px;
+  }
+}
+
+.data_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #474545;
+}
+
+.journal_form-tag {
+  height: 41px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  &::placeholder {
+    color: #fff;
+    font-size: 16px;
+  }
+}
+
+.tag_flex {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #474545;
+  svg {
+    cursor: pointer;
+  }
+}
+
+.journal_form-textarea {
+  background-color: transparent;
+  border: 2px solid #474545;
+  padding: 20px;
+  &::placeholder {
+    color: #474545;
+  }
+}
+
+.btnjournal-save {
+  width: 135px;
+  height: 42px;
+  font-size: 16px;
+  background-color: #312eb5;
+  border: 1px solid #312eb5;
+  text-align: center;
+  color: #fff;
+  border-radius: 6px;
+  transition: 0.5s ease;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.journal_btn_flex {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}

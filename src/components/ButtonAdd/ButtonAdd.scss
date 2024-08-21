@@ -1,0 +1,12 @@
+.btn_add {
+  width: 365px;
+  padding: 15px 0;
+  color: #fff;
+  background-color: #ffffff08;
+  border: none;
+  outline: none;
+  transition: .5s ease;
+  &:hover{
+    background-color: #ffffff1c;
+  }
+}
