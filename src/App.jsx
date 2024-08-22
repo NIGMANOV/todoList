@@ -5,6 +5,7 @@ import LeftPanel from "./components/Layout/LeftPanel/LeftPanel";
 import Body from "./components/Layout/Body/Body";
 import Logo from "./components/Logo/Logo";
 import ButtonAdd from "./components/ButtonAdd/ButtonAdd";
+import JournalCard from "./components/JournalCard/JournalCard";
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
       <LeftPanel>
       <Logo/>
       <ButtonAdd/>
+      <JournalCard/>
       </LeftPanel>
+      
       <Body>
       <JournalForm />
       </Body>

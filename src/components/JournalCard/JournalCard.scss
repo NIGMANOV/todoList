@@ -1,0 +1,16 @@
+.JournalCard_flex{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.JournalCard{
+    width: 362px;
+    height: 98px;
+    background-color: #FFFFFF08;
+    border-radius: 3px;
+    transition: .5s ease;
+    &:hover{
+        background-color: #FFFFFF1A;
+    }
+}
