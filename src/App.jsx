@@ -5,19 +5,25 @@ import LeftPanel from "./components/Layout/LeftPanel/LeftPanel";
 import Body from "./components/Layout/Body/Body";
 import Logo from "./components/Logo/Logo";
 import ButtonAdd from "./components/ButtonAdd/ButtonAdd";
-import JournalCard from "./components/JournalCard/JournalCard";
+import JournalList from "./components/JournalList/JournalList";
+import CardButton from "./components/CardButton/CardButton";
+import JournalItem from "./components/JournalItem/JournalItem";
 
 const App = () => {
   return (
     <div className="app">
       <LeftPanel>
-      <Logo/>
-      <ButtonAdd/>
-      <JournalCard/>
+        <Logo />
+        <ButtonAdd />
+        <JournalList>
+          <CardButton>
+            <JournalItem />
+          </CardButton>
+        </JournalList>
       </LeftPanel>
-      
+
       <Body>
-      <JournalForm />
+        <JournalForm />
       </Body>
     </div>
   );
