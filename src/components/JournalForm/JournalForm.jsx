@@ -1,62 +1,74 @@
 import React, { useRef, useState } from "react";
 import "./JournalForm.scss";
+import Button from "../Button/Button";
 
-function JournalForm({onSubmit}) {
-
+function JournalForm({ onSubmit }) {
   const [errors, setErrors] = useState({});
-  const [DisableValidation, setDisableValidation] = useState()
+  const [disableValidation, setDisableValidation] = useState(false);
 
   const addJournalItem = (e) => {
     e.preventDefault();
-    const formDate = new formDate(e.target)
-    const formProps = Object.fromEnteries(formDate)
-    const requireFeilds = ["title", "date", "text"]
-    const newErrors = {}
-    requireFeilds.forEach(feild => {
-        if (!formProps[feild]) {
-          newErrors[feild] = true
-        }
-    })
-    setErrors(newErrors)
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+    const requiredFields = ["title", "date", "text"];
+    const newErrors = {};
 
-    if (Object.keys(newErrors).length === 0){
-      onSubmit(formProps)
+    requiredFields.forEach((field) => {
+      if (!formProps[field]) {
+        newErrors[field] = true;
+      }
+    });
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      onSubmit(formProps);
     } else {
-      setDisableValidation(true)
+      setDisableValidation(true);
       setTimeout(() => {
-        setDisableValidation(false)
-        setErrors({})
-      }, 2000)
+        setDisableValidation(false);
+        setErrors({});
+      }, 2000);
     }
-  }
+  };
+
+  const formRef = useRef(null);
 
   const onReset = () => {
-    localStorage.removeItem('data')
-    location.reload()
+    localStorage.removeItem("data");
+    window.location.reload();
+  };
 
-  }
+  const inputTitle = useRef(null);
+  const inputDate = useRef(null);
+  const inputText = useRef(null);
 
-  const inputTitle = useRef(null)
-  const inputDate = useRef(null)
-  const inputText = useRef(null)
-
-  const onButtonclick = () => {
-    inputTitle.current.value = ''
-    inputDate.current.value = ''
-    inputText.current.value = ''
-  }
+  const onButtonClick = () => {
+    inputTitle.current.value = "";
+    inputDate.current.value = "";
+    inputText.current.value = "";
+  };
 
   return (
     <>
-      <form action="" className="journal_form">
-        <div className={`text_flex ${errors.title && 'error'} ${DisableValidation ? 'disable-validation' : ''}`} >
+      <form
+        action=""
+        ref={formRef}
+        className="journal_form"
+        onSubmit={addJournalItem}
+      >
+        <div
+          className={`text_flex ${errors.title && "error"} ${
+            disableValidation ? "disable-validation" : ""
+          }`}
+        >
           <input
             className="journal_form-text"
             type="text"
             placeholder="Напиши свое воспоминание"
+            name="title"
             ref={inputTitle}
           />
-          <button className="journal_btn" onClick={onButtonclick}>
+          <button className="journal_btn" type="button" onClick={onButtonClick}>
             <svg
               width="30"
               height="30"
@@ -76,34 +88,43 @@ function JournalForm({onSubmit}) {
                 <path
                   d="M21.6667 8.33334H8.33335C7.41288 8.33334 6.66669 9.07954 6.66669 10V10.8333C6.66669 11.7538 7.41288 12.5 8.33335 12.5H21.6667C22.5872 12.5 23.3334 11.7538 23.3334 10.8333V10C23.3334 9.07954 22.5872 8.33334 21.6667 8.33334Z"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M8.33331 12.5V20C8.33331 20.442 8.50891 20.866 8.82147 21.1785C9.13403 21.4911 9.55795 21.6667 9.99998 21.6667H20C20.442 21.6667 20.8659 21.4911 21.1785 21.1785C21.4911 20.866 21.6666 20.442 21.6666 20V12.5"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M13.3333 15.8333H16.6666"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </g>
             </svg>
           </button>
         </div>
 
-        <div className={`data_flex ${errors.date && 'error'} ${DisableValidation ? 'disabler-validation' : ''}`}>
-          <input className="journal_form-date" type="date" ref={inputDate}/>
+        <div
+          className={`data_flex ${errors.date && "error"} ${
+            disableValidation ? "disable-validation" : ""
+          }`}
+        >
+          <input
+            className="journal_form-date"
+            type="date"
+            name="date"
+            ref={inputDate}
+          />
         </div>
 
-        <div className='tag_flex'>
+        <div className="tag_flex">
           <svg
             width="18"
             height="18"
@@ -115,26 +136,34 @@ function JournalForm({onSubmit}) {
               <path
                 d="M3 15H15C15.3978 15 15.7794 14.842 16.0607 14.5607C16.342 14.2794 16.5 13.8978 16.5 13.5V6C16.5 5.60218 16.342 5.22064 16.0607 4.93934C15.7794 4.65804 15.3978 4.5 15 4.5H9.0525C8.80544 4.49872 8.56252 4.43644 8.34532 4.31868C8.12813 4.20092 7.94338 4.03134 7.8075 3.825L7.1925 2.925C7.05662 2.71866 6.87187 2.54908 6.65468 2.43132C6.43748 2.31356 6.19456 2.25128 5.9475 2.25H3C2.60218 2.25 2.22064 2.40804 1.93934 2.68934C1.65804 2.97064 1.5 3.35218 1.5 3.75V13.5C1.5 14.325 2.175 15 3 15Z"
                 stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
           </svg>
 
-          <input className="journal_form-tag" type="text" placeholder="Метки"/>
+          <input className="journal_form-tag" type="text" placeholder="Метки" />
         </div>
 
-        <textarea className={`journal_form-textarea ${errors.textarea && 'error'} ${DisableValidation ? 'disable-validation' : ''}`} placeholder="Напишите заметку" ref={inputText}></textarea>
-        
+        <textarea
+          className={`journal_form-textarea ${errors.text && "error"} ${
+            disableValidation ? "disable-validation" : ""
+          }`}
+          placeholder="Напишите заметку"
+          name="text"
+          ref={inputText}
+        ></textarea>
 
-            <div className="journal_btn_flex">
-        <button className="btnjournal-save">Сохранить</button>
-        <button className="btnjournal-save" onClick={onReset}>Очистить</button>
-            </div>
+        <div className="journal_btn_flex">
+          <Button text="Сохранить" type="submit" />
+          <button className="btnjournal-save" type="button" onClick={onReset}>
+            Очистить
+          </button>
+        </div>
       </form>
     </>
   );
-};
+}
 
 export default JournalForm;
